@@ -5,5 +5,13 @@
   "main": "index.js",
   "repository": "https://github.com/sasalatart/shamebot",
   "author": "Sebastián Salata R-T <SA.SalataRT@GMail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "eslint": "^4.13.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0"
+  }
 }
