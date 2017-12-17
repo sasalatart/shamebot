@@ -7,11 +7,15 @@
   "author": "Sebastián Salata R-T <SA.SalataRT@GMail.com>",
   "license": "MIT",
   "scripts": {
+    "start": "node index.js",
     "lint": "eslint ."
   },
   "devDependencies": {
     "eslint": "^4.13.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.8.0"
+  },
+  "dependencies": {
+    "botkit": "^0.6.7"
   }
 }
