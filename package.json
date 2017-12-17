@@ -1,0 +1,9 @@
+{
+  "name": "shamebot",
+  "version": "1.0.0",
+  "description": "Embarrasses -in a friendly way- slack teammates who commit programming mistakes :)",
+  "main": "index.js",
+  "repository": "https://github.com/sasalatart/shamebot",
+  "author": "Sebastián Salata R-T <SA.SalataRT@GMail.com>",
+  "license": "MIT"
+}
