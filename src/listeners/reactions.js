@@ -1,15 +1,31 @@
+const _ = require('lodash');
 const reactionsHelper = require('../utils/reactions');
 const { startConversation, ask } = require('../utils/conversations');
 const {
   getTeamStorage,
+  getReactions,
   saveReaction,
   deleteReaction,
+  DEFAULT_REACTION,
 } = require('../services/storage-service');
 
 function parse(reaction) {
   return reaction[0] === ':'
     ? reaction.substr(1).slice(0, -1)
     : reaction;
+}
+
+function showAllReactionsListener(controller) {
+  return async (bot, message) => {
+    const reactions = await getReactions(getTeamStorage(controller));
+
+    if (_.isEmpty(reactions)) {
+      bot.reply(message, `I do not have any reactions yet :cry:, and will fall back to :${DEFAULT_REACTION}:.`);
+    } else {
+      const formattedReactions = Object.keys(reactions).reduce((acc, reaction) => `${acc} :${reaction}:`, '');
+      bot.reply(message, `So far, I have learnt these reactions: ${formattedReactions}`);
+    }
+  };
 }
 
 function addReactionListener(controller) {
@@ -51,6 +67,7 @@ function deleteReactionListener(controller) {
 }
 
 module.exports = {
+  showAllReactionsListener,
   addReactionListener,
   deleteReactionListener,
 };

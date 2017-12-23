@@ -51,4 +51,5 @@ module.exports = {
   getRandomReaction,
   saveReaction,
   deleteReaction,
+  DEFAULT_REACTION,
 };
