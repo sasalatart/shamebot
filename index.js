@@ -1,6 +1,9 @@
 const Botkit = require('botkit');
 const { failedBuildListener } = require('./src/listeners/builds');
-const { addReactionListener } = require('./src/listeners/reactions');
+const {
+  addReactionListener,
+  deleteReactionListener,
+} = require('./src/listeners/reactions');
 
 const controller = Botkit.slackbot({
   debug: process.env.NODE_ENV === 'production',
@@ -13,3 +16,4 @@ controller.spawn({
 
 controller.on('bot_message', failedBuildListener(controller));
 controller.hears('add reaction', 'direct_mention, mention', addReactionListener(controller));
+controller.hears('delete reaction', 'direct_mention, mention', deleteReactionListener(controller));

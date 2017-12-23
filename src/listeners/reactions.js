@@ -1,6 +1,10 @@
 const reactionsHelper = require('../utils/reactions');
 const { startConversation, ask } = require('../utils/conversations');
-const { getTeamStorage, saveReaction } = require('../services/storage-service');
+const {
+  getTeamStorage,
+  saveReaction,
+  deleteReaction,
+} = require('../services/storage-service');
 
 function parse(reaction) {
   return reaction[0] === ':'
@@ -28,6 +32,25 @@ function addReactionListener(controller) {
   };
 }
 
+function deleteReactionListener(controller) {
+  return async (bot, message) => {
+    const teamStorage = getTeamStorage(controller);
+    const conv = await startConversation(bot, message);
+
+    conv.say('Roger that.');
+    const [, response] = await ask('Which reaction would you like to remove?', conv);
+    try {
+      const { deleted } = await deleteReaction(parse(response.text), teamStorage);
+      bot.reply(message, deleted
+        ? 'Reaction removed.'
+        : 'I did not have that reaction.');
+    } catch (error) {
+      bot.reply(message, 'I am sorry Dave, I am afraid I can\'t do that.');
+    }
+  };
+}
+
 module.exports = {
   addReactionListener,
+  deleteReactionListener,
 };

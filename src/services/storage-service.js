@@ -2,6 +2,7 @@ const Promise = require('bluebird');
 const _ = require('lodash');
 
 const REACTIONS = 'reactions';
+const DEFAULT_REACTION = 'astonished';
 
 function getTeamStorage(controller) {
   return {
@@ -17,7 +18,7 @@ async function getReactions(teamStorage) {
   try {
     reactions = await teamStorage.get(REACTIONS);
   } catch (error) {
-    reactions = { id: REACTIONS, astonished: true };
+    reactions = { id: REACTIONS, [DEFAULT_REACTION]: true };
     await teamStorage.save(reactions);
   }
   return _.omit(reactions, 'id');
@@ -25,7 +26,7 @@ async function getReactions(teamStorage) {
 
 async function getRandomReaction(teamStorage) {
   const reactions = await getReactions(teamStorage);
-  return _.sample(Object.keys(reactions));
+  return _.sample(Object.keys(reactions)) || DEFAULT_REACTION;
 }
 
 async function saveReaction(reaction, teamStorage) {
@@ -36,9 +37,18 @@ async function saveReaction(reaction, teamStorage) {
   return { saved: !reactions[reaction] };
 }
 
+async function deleteReaction(reaction, teamStorage) {
+  const reactions = await getReactions(teamStorage);
+  if (reactions[reaction]) {
+    await teamStorage.save({ id: REACTIONS, ..._.omit(reactions, reaction) });
+  }
+  return { deleted: reactions[reaction] };
+}
+
 module.exports = {
   getTeamStorage,
   getReactions,
   getRandomReaction,
   saveReaction,
+  deleteReaction,
 };
