@@ -32,8 +32,6 @@ function addReactionListener(controller) {
   return async (bot, message) => {
     const teamStorage = getTeamStorage(controller);
     const conv = await startConversation(bot, message);
-
-    conv.say('Roger that.');
     const [, response] = await ask('Which reaction would you like to add?', conv);
     try {
       const parsedResponse = parse(response.text);
@@ -52,8 +50,6 @@ function deleteReactionListener(controller) {
   return async (bot, message) => {
     const teamStorage = getTeamStorage(controller);
     const conv = await startConversation(bot, message);
-
-    conv.say('Roger that.');
     const [, response] = await ask('Which reaction would you like to remove?', conv);
     try {
       const { deleted } = await deleteReaction(parse(response.text), teamStorage);
