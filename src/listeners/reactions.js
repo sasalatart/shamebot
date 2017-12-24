@@ -1,13 +1,13 @@
 const _ = require('lodash');
 const reactionsHelper = require('../utils/reactions');
 const { startConversation, ask } = require('../utils/conversations');
+const { getTeamStorage } = require('../services/storage');
 const {
-  getTeamStorage,
   getReactions,
   saveReaction,
   deleteReaction,
   DEFAULT_REACTION,
-} = require('../services/storage-service');
+} = require('../services/storage/reactions');
 
 function parse(reaction) {
   return reaction[0] === ':'

@@ -1,17 +1,7 @@
-const Promise = require('bluebird');
 const _ = require('lodash');
 
 const REACTIONS = 'reactions';
 const DEFAULT_REACTION = 'astonished';
-
-function getTeamStorage(controller) {
-  return {
-    save: Promise.promisify(controller.storage.teams.save),
-    get: Promise.promisify(controller.storage.teams.get),
-    delete: Promise.promisify(controller.storage.teams.delete),
-    all: Promise.promisify(controller.storage.teams.all),
-  };
-}
 
 async function getReactions(teamStorage) {
   let reactions = {};
@@ -46,7 +36,6 @@ async function deleteReaction(reaction, teamStorage) {
 }
 
 module.exports = {
-  getTeamStorage,
   getReactions,
   getRandomReaction,
   saveReaction,

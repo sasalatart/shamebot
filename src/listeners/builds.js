@@ -1,6 +1,7 @@
 const _ = require('lodash');
 const { searchGifFor } = require('../services/giphy-service');
-const { getTeamStorage, getRandomReaction } = require('../services/storage-service');
+const { getTeamStorage } = require('../services/storage');
+const { getRandomReaction } = require('../services/storage/reactions');
 const reactionsHelper = require('../utils/reactions');
 
 function robohashGenerator(authorName) {
