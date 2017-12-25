@@ -18,7 +18,9 @@
   "dependencies": {
     "bluebird": "^3.5.1",
     "botkit": "^0.6.7",
+    "camelize": "^1.0.0",
     "lodash": "^4.17.4",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "snakeize": "^0.1.0"
   }
 }

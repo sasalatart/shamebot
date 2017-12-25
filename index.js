@@ -1,4 +1,5 @@
 const Botkit = require('botkit');
+const snakeize = require('snakeize');
 const { failedBuildListener } = require('./src/listeners/builds');
 const {
   showAllReactionsListener,
@@ -6,10 +7,10 @@ const {
   deleteReactionListener,
 } = require('./src/listeners/reactions');
 
-const controller = Botkit.slackbot({
+const controller = Botkit.slackbot(snakeize({
   debug: process.env.NODE_ENV === 'production',
-  json_file_store: './db',
-});
+  jsonFileStore: './db',
+}));
 
 controller.spawn({
   token: process.env.SLACK_TOKEN,
