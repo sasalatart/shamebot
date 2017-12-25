@@ -12,11 +12,13 @@ function robohashGenerator(authorName) {
   return `https://robohash.org/${authorName}${date}.png`;
 }
 
-async function replyBuilder(authorName) {
+async function replyBuilder(authorName, authorIcon) {
   return {
     username: 'ShameBot',
     iconUrl: robohashGenerator(authorName),
     attachments: [{
+      authorName,
+      authorIcon,
       pretext: _.sample(dialogues.replies.insults),
       title: `Shame on you, ${authorName}!`,
       color: '#000',
@@ -31,10 +33,10 @@ function failedBuildListener(controller) {
       return;
     }
 
-    const { authorName } = camelize(message.attachments[0]);
+    const { authorName, authorIcon } = camelize(message.attachments[0]);
     const reaction = await getRandomReaction(getTeamStorage(controller));
     reactionsHelper(bot).add(message, reaction);
-    bot.reply(message, snakeize(await replyBuilder(authorName)));
+    bot.reply(message, snakeize(await replyBuilder(authorName, authorIcon)));
   };
 }
 
