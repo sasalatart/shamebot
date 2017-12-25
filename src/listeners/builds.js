@@ -4,6 +4,7 @@ const snakeize = require('snakeize');
 const { searchGifFor } = require('../services/giphy-service');
 const { getTeamStorage } = require('../services/storage');
 const { getRandomReaction } = require('../services/storage/reactions');
+const { addShameTo } = require('../services/storage/shames');
 const reactionsHelper = require('../utils/reactions');
 const { dialogues } = require('../utils/conversations');
 
@@ -33,9 +34,12 @@ function failedBuildListener(controller) {
       return;
     }
 
+    const teamStorage = getTeamStorage(controller);
     const { authorName, authorIcon } = camelize(message.attachments[0]);
-    const reaction = await getRandomReaction(getTeamStorage(controller));
-    reactionsHelper(bot).add(message, reaction);
+
+    addShameTo(authorName, teamStorage);
+    reactionsHelper(bot).add(message, await getRandomReaction(teamStorage));
+
     bot.reply(message, snakeize(await replyBuilder(authorName, authorIcon)));
   };
 }
