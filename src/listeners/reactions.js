@@ -1,12 +1,15 @@
 const _ = require('lodash');
 const reactionsHelper = require('../utils/reactions');
-const { startConversation, ask } = require('../utils/conversations');
+const {
+  startConversation,
+  ask,
+  dialogues: { questions, replies },
+} = require('../utils/conversations');
 const { getTeamStorage } = require('../services/storage');
 const {
   getReactions,
   saveReaction,
   deleteReaction,
-  DEFAULT_REACTION,
 } = require('../services/storage/reactions');
 
 function parse(reaction) {
@@ -20,10 +23,10 @@ function showAllReactionsListener(controller) {
     const reactions = await getReactions(getTeamStorage(controller));
 
     if (_.isEmpty(reactions)) {
-      bot.reply(message, `I do not have any reactions yet :cry:, and will fall back to :${DEFAULT_REACTION}:.`);
+      bot.reply(message, replies.reactions.noneYet);
     } else {
-      const formattedReactions = Object.keys(reactions).reduce((acc, reaction) => `${acc} :${reaction}:`, '');
-      bot.reply(message, `So far, I have learnt these reactions: ${formattedReactions}`);
+      const allReactions = Object.keys(reactions).reduce((acc, reaction) => `${acc} :${reaction}:`, '');
+      bot.reply(message, replies.reactions.all(allReactions));
     }
   };
 }
@@ -32,16 +35,14 @@ function addReactionListener(controller) {
   return async (bot, message) => {
     const teamStorage = getTeamStorage(controller);
     const conv = await startConversation(bot, message);
-    const [, response] = await ask('Which reaction would you like to add?', conv);
+    const [, response] = await ask(questions.reactions.add, conv);
     try {
       const parsedResponse = parse(response.text);
       await reactionsHelper(bot).add(response, parsedResponse);
       const { saved } = await saveReaction(parsedResponse, teamStorage);
-      bot.reply(message, saved
-        ? 'Reaction learned :nerd_face:, look at your message.'
-        : 'I already knew that reaction :nerd_face:, look at your message.');
+      bot.reply(message, saved ? replies.reactions.learned : replies.reactions.knewIt);
     } catch (error) {
-      bot.reply(message, 'I am sorry Dave, I am afraid I can\'t do that.');
+      bot.reply(message, replies.error);
     }
   };
 }
@@ -50,14 +51,12 @@ function deleteReactionListener(controller) {
   return async (bot, message) => {
     const teamStorage = getTeamStorage(controller);
     const conv = await startConversation(bot, message);
-    const [, response] = await ask('Which reaction would you like to remove?', conv);
+    const [, response] = await ask(questions.reactions.delete, conv);
     try {
       const { deleted } = await deleteReaction(parse(response.text), teamStorage);
-      bot.reply(message, deleted
-        ? 'Reaction removed.'
-        : 'I did not have that reaction.');
+      bot.reply(message, deleted ? replies.reactions.deleted : replies.reactions.notFound);
     } catch (error) {
-      bot.reply(message, 'I am sorry Dave, I am afraid I can\'t do that.');
+      bot.reply(message, replies.error);
     }
   };
 }
