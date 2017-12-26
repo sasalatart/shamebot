@@ -24,10 +24,11 @@ function showAllReactionsListener(controller) {
 
     if (_.isEmpty(reactions)) {
       bot.reply(message, replies.reactions.noneYet);
-    } else {
-      const allReactions = Object.keys(reactions).reduce((acc, reaction) => `${acc} :${reaction}:`, '');
-      bot.reply(message, replies.reactions.all(allReactions));
+      return;
     }
+
+    const allReactions = Object.keys(reactions).reduce((acc, reaction) => `${acc} :${reaction}:`, '');
+    bot.reply(message, replies.reactions.all(allReactions));
   };
 }
 
