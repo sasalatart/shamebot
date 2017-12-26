@@ -29,6 +29,9 @@ const dialogues = {
       all: allReactions => `So far, I have learnt these reactions: ${allReactions}`,
       noneYet: `:cry: I do not have any reactions yet. Falling back to :${DEFAULT_REACTION}:.`,
     },
+    shamers: {
+      noneYet: ':cry: I do not know of any shamers yet. No one to laugh at.',
+    },
     insults: [
       'Just what do you think you\'re doing Dave?',
       'It can only be attributed to human error.',

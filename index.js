@@ -6,6 +6,9 @@ const {
   addReactionListener,
   deleteReactionListener,
 } = require('./src/listeners/reactions');
+const {
+  showRankingListener,
+} = require('./src/listeners/shamers');
 
 const controller = Botkit.slackbot(snakeize({
   debug: process.env.NODE_ENV === 'production',
@@ -20,3 +23,4 @@ controller.on('bot_message', failedBuildListener(controller));
 controller.hears('show reactions', 'direct_mention, mention', showAllReactionsListener(controller));
 controller.hears('add reaction', 'direct_mention, mention', addReactionListener(controller));
 controller.hears('delete reaction', 'direct_mention, mention', deleteReactionListener(controller));
+controller.hears('show ranking', 'direct_mention, mention', showRankingListener(controller));

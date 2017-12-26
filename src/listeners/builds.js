@@ -7,16 +7,12 @@ const { getRandomReaction } = require('../services/storage/reactions');
 const { addShameTo } = require('../services/storage/shames');
 const reactionsHelper = require('../utils/reactions');
 const { dialogues } = require('../utils/conversations');
-
-function robohashGenerator(authorName) {
-  const date = (new Date()).getDate();
-  return `https://robohash.org/${authorName}${date}.png`;
-}
+const { dailyRobohash } = require('../utils/robohash');
 
 async function replyBuilder(authorName, authorIcon) {
   return {
     username: 'ShameBot',
-    iconUrl: robohashGenerator(authorName),
+    iconUrl: dailyRobohash(authorName),
     attachments: [{
       authorName,
       authorIcon,
