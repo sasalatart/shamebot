@@ -21,4 +21,11 @@ module.exports = {
   },
   HALIcon: 'https://goo.gl/LsPgJe',
   debugEnabled: process.env.NODE_ENV === 'production',
+  commands: {
+    help: 'help',
+    showRanking: 'show ranking',
+    showReactions: 'show reactions',
+    addReaction: 'add reaction',
+    deleteReaction: 'delete reaction',
+  },
 };

@@ -56,6 +56,12 @@ const dialogues = {
       'What, what, what, what, what, what, what, what, what, what?',
       'You do that again and see what happens...',
     ],
+    commandTranslations: {
+      showRanking: 'shows the ranking of shamers, ordered by number of shames.',
+      showReactions: 'shows a list of all registered reactions.',
+      addReaction: 'starts a conversation to register a new reaction.',
+      deleteReaction: 'starts a conversation to delete a registered reaction.',
+    },
   },
 };
 
