@@ -1,13 +1,12 @@
 const _ = require('lodash');
-
-const SHAMES = 'shames';
+const config = require('../../config');
 
 async function getShames(teamStorage) {
   let shames = {};
   try {
-    shames = await teamStorage.get(SHAMES);
+    shames = await teamStorage.get(config.storage.ids.shames);
   } catch (error) {
-    shames = { id: SHAMES };
+    shames = { id: config.storage.ids.shames };
     await teamStorage.save(shames);
   }
   return _.omit(shames, 'id');
@@ -16,7 +15,7 @@ async function getShames(teamStorage) {
 async function addShameTo(authorName, teamStorage) {
   const shames = await getShames(teamStorage);
   return teamStorage.save({
-    id: SHAMES,
+    id: config.storage.ids.shames,
     ...shames,
     [authorName]: (shames[authorName] || 0) + 1,
   });

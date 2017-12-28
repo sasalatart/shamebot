@@ -1,12 +1,11 @@
 const request = require('request-promise');
 const _ = require('lodash');
+const config = require('../config');
 
-const GIPHY_URL = 'https://api.giphy.com/v1/gifs/search';
-const MAX_SIZE_IN_BYTES = 1000000;
-const blacklistRegex = new RegExp('(.*_(still|webp|mp4))', 'i');
+const blacklistRegex = new RegExp(config.gifs.blacklistRegex, 'i');
 
 function filterImageResolver(value, key) {
-  return value.url && value.size < MAX_SIZE_IN_BYTES && !blacklistRegex.test(key);
+  return value.url && value.size < config.gifs.maxSize && !blacklistRegex.test(key);
 }
 
 function sortBySizeResolver(imageA, imageB) {
@@ -25,7 +24,7 @@ function chooseFromResponse(response) {
 
 async function searchGifFor(phrase) {
   const options = {
-    uri: GIPHY_URL,
+    uri: config.gifs.searchUrl,
     qs: { api_key: process.env.GIPHY_API_KEY, q: phrase },
     json: true,
   };

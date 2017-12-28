@@ -9,10 +9,12 @@ const {
 const {
   showRankingListener,
 } = require('./src/listeners/shamers');
+const config = require('./src/config');
 
 const controller = Botkit.slackbot(snakeize({
-  debug: process.env.NODE_ENV === 'production',
-  jsonFileStore: './db',
+  debug: config.debugEnabled,
+  jsonFileStore: config.storage.dir,
+  retry: config.reconnectAttempts,
 }));
 
 controller.spawn({

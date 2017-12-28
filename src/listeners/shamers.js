@@ -4,6 +4,7 @@ const { getTeamStorage } = require('../services/storage');
 const { getShames } = require('../services/storage/shames');
 const { dialogues: { replies } } = require('../utils/conversations');
 const { robohash } = require('../utils/robohash');
+const config = require('../config');
 
 function generateRanking(shames) {
   return Object.keys(shames)
@@ -26,11 +27,11 @@ function showRankingListener(controller) {
     }
 
     const reply = snakeize({
-      username: 'ShameBot',
+      username: config.botName,
       iconUrl: robohash('Ranking'),
       attachments: [{
-        pretext: 'Shamers so far:',
-        color: '#000',
+        pretext: replies.ranking.shamersSoFar,
+        color: config.attachments.color,
         fields: generateRanking(shames),
       }],
     });

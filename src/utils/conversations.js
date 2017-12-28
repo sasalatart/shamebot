@@ -1,5 +1,6 @@
 const Promise = require('bluebird');
-const { DEFAULT_REACTION } = require('../services/storage/reactions');
+const snakeize = require('snakeize');
+const config = require('../config');
 
 function ask(question, conversation) {
   return Promise.fromCallback(cb =>
@@ -27,10 +28,13 @@ const dialogues = {
       deleted: ':wastebasket: Reaction deleted.',
       notFound: ':slightly_frowning_face: I did not know that reaction.',
       all: allReactions => `So far, I have learnt these reactions: ${allReactions}`,
-      noneYet: `:cry: I do not have any reactions yet. Falling back to :${DEFAULT_REACTION}:.`,
+      noneYet: `:cry: I do not have any reactions yet. Falling back to :${config.reactions.default}:.`,
     },
     shamers: {
       noneYet: ':cry: I do not know of any shamers yet. No one to laugh at.',
+    },
+    ranking: {
+      shamersSoFar: 'Shamers so far:',
     },
     insults: [
       'Just what do you think you\'re doing Dave?',
@@ -52,12 +56,18 @@ const dialogues = {
       'What, what, what, what, what, what, what, what, what, what?',
       'You do that again and see what happens...',
     ],
-    error: 'I am sorry Dave, I am afraid I can\'t do that.',
   },
 };
+
+const errorMessage = snakeize({
+  username: config.botName,
+  iconUrl: config.HALIcon,
+  text: 'I am sorry Dave, I am afraid I can\'t do that.',
+});
 
 module.exports = {
   startConversation,
   ask,
   dialogues,
+  errorMessage,
 };

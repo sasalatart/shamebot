@@ -8,17 +8,18 @@ const { addShameTo } = require('../services/storage/shames');
 const reactionsHelper = require('../utils/reactions');
 const { dialogues } = require('../utils/conversations');
 const { dailyRobohash } = require('../utils/robohash');
+const config = require('../config');
 
 async function replyBuilder(authorName, authorIcon) {
   return {
-    username: 'ShameBot',
+    username: config.botName,
     iconUrl: dailyRobohash(authorName),
     attachments: [{
       authorName,
       authorIcon,
       pretext: _.sample(dialogues.replies.insults),
       title: `Shame on you, ${authorName}!`,
-      color: '#000',
+      color: config.attachments.color,
       imageUrl: await searchGifFor('shame'),
     }],
   };

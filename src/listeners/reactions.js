@@ -4,6 +4,7 @@ const {
   startConversation,
   ask,
   dialogues: { questions, replies },
+  errorMessage,
 } = require('../utils/conversations');
 const { getTeamStorage } = require('../services/storage');
 const {
@@ -43,7 +44,7 @@ function addReactionListener(controller) {
       const { saved } = await saveReaction(parsedResponse, teamStorage);
       bot.reply(message, saved ? replies.reactions.learned : replies.reactions.knewIt);
     } catch (error) {
-      bot.reply(message, replies.error);
+      bot.reply(message, errorMessage);
     }
   };
 }
@@ -57,7 +58,7 @@ function deleteReactionListener(controller) {
       const { deleted } = await deleteReaction(parse(response.text), teamStorage);
       bot.reply(message, deleted ? replies.reactions.deleted : replies.reactions.notFound);
     } catch (error) {
-      bot.reply(message, replies.error);
+      bot.reply(message, errorMessage);
     }
   };
 }
