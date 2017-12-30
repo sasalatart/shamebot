@@ -1,15 +1,13 @@
 const Botkit = require('botkit');
 const snakeize = require('snakeize');
-const { helpListener } = require('./src/listeners/help');
-const { failedBuildListener } = require('./src/listeners/builds');
 const {
+  helpListener,
+  failedBuildListener,
   showAllReactionsListener,
   addReactionListener,
   deleteReactionListener,
-} = require('./src/listeners/reactions');
-const {
   showRankingListener,
-} = require('./src/listeners/shamers');
+} = require('./src/listeners');
 const config = require('./src/config');
 
 const controller = Botkit.slackbot(snakeize({
