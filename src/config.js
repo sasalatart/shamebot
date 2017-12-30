@@ -20,7 +20,7 @@ module.exports = {
     default: 'astonished',
   },
   HALIcon: 'https://goo.gl/LsPgJe',
-  debugEnabled: process.env.NODE_ENV === 'production',
+  debugEnabled: process.env.NODE_ENV !== 'production',
   commands: {
     help: 'help',
     showRanking: 'show ranking',
