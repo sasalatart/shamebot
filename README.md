@@ -41,3 +41,11 @@ docker run -d --name=shamebot -p 3000:3000 \
 ```
 
 The server's machine should now be redirecting its port 3000 to the container's port 3000.
+
+## Contributing
+
+1. Fork this repository
+2. Create your branch from the `develop` branch (`git checkout -b my-changes`)
+3. Commit your changes using [these emojis](https://github.com/dannyfritz/commit-message-emoji) (`git commit -am '<emoji> my changes message'`)
+4. Push your branch (`git push origin my-changes`)
+5. Create a new Pull Request
