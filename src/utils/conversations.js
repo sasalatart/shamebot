@@ -15,6 +15,11 @@ function startConversation(bot, message) {
 }
 
 const dialogues = {
+  greet: {
+    sayHi: name => `:wave: Hello! My name is ${name}.`,
+    aboutMe: name => `You can learn more about my commands by typing \`@${name} help\`.`,
+    sourceCode: `Source Code: ${config.repository}.`,
+  },
   questions: {
     reactions: {
       add: ':thinking_face: Which reaction would you like to add?',

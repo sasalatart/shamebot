@@ -1,6 +1,7 @@
 module.exports = {
   botName: 'ShameBot',
   reconnectAttempts: 10,
+  debugEnabled: process.env.NODE_ENV !== 'production',
   storage: {
     dir: './storage',
     ids: {
@@ -14,8 +15,6 @@ module.exports = {
   reactions: {
     default: 'astonished',
   },
-  HALIcon: 'https://goo.gl/LsPgJe',
-  debugEnabled: process.env.NODE_ENV !== 'production',
   commands: {
     help: 'help',
     showRanking: 'show ranking',
@@ -23,4 +22,7 @@ module.exports = {
     addReaction: 'add reaction',
     deleteReaction: 'delete reaction',
   },
+  HALIcon: 'https://goo.gl/LsPgJe',
+  giphyAttributionMark: 'https://goo.gl/AcrduK',
+  repository: 'https://github.com/sasalatart/shamebot',
 };

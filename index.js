@@ -1,6 +1,7 @@
 const Botkit = require('botkit');
 const snakeize = require('snakeize');
 const {
+  joinedListener,
   helpListener,
   failedBuildListener,
   showAllReactionsListener,
@@ -21,6 +22,7 @@ controller.spawn({
 }).startRTM();
 
 const { commands } = config;
+controller.on('bot_channel_join', joinedListener);
 controller.on('bot_message', failedBuildListener(controller));
 controller.hears(commands.help, 'direct_mention', helpListener);
 controller.hears(commands.showRanking, 'direct_mention', showRankingListener(controller));
