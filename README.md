@@ -34,13 +34,11 @@ You will need a `SLACK_TOKEN` which identifies your bot with your slack team, an
 #### Docker
 
 ```sh
-docker run -d --name=shamebot -p 3000:3000 \
+docker run -d --name=shamebot \
   --env SLACK_TOKEN=<your-slack-token> \
   --env GIPHY_API_KEY=<your-giphy-api-key> \
   sasalatart/shamebot
 ```
-
-The server's machine should now be redirecting its port 3000 to the container's port 3000.
 
 ## Contributing
 
