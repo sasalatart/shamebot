@@ -22,6 +22,11 @@ module.exports = {
     addReaction: 'add reaction',
     deleteReaction: 'delete reaction',
   },
+  searchTerms: [
+    'shame',
+    'stupid',
+    'laughing',
+  ],
   HALIcon: 'https://goo.gl/LsPgJe',
   giphyAttributionMark: 'https://goo.gl/AcrduK',
   repository: 'https://github.com/sasalatart/shamebot',
