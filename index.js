@@ -1,5 +1,6 @@
 const Botkit = require('botkit');
 const snakeize = require('snakeize');
+const config = require('./src/config');
 const {
   joinedListener,
   helpListener,
@@ -9,7 +10,7 @@ const {
   deleteReactionListener,
   showRankingListener,
 } = require('./src/listeners');
-const config = require('./src/config');
+const { scheduleCleanup } = require('./src/services/storage/shames');
 
 const controller = Botkit.slackbot(snakeize({
   debug: config.debugEnabled,
@@ -20,6 +21,8 @@ const controller = Botkit.slackbot(snakeize({
 controller.spawn({
   token: process.env.SLACK_TOKEN,
 }).startRTM();
+
+scheduleCleanup(controller);
 
 const { commands } = config;
 controller.on('bot_channel_join', joinedListener);

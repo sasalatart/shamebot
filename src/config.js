@@ -9,6 +9,10 @@ module.exports = {
       shames: 'shames',
     },
   },
+  rankingCleanup: {
+    cronTime: '0 0 5 * * *',
+    timeZone: 'America/Santiago',
+  },
   attachments: {
     color: '#000',
   },
