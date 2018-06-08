@@ -20,7 +20,7 @@ async function replyBuilder(authorName, authorIcon) {
       pretext: _.sample(dialogues.replies.insults),
       title: `Shame on you, ${authorName}!`,
       color: config.attachments.color,
-      imageUrl: await searchGifFor(_.sample(config.searchTerms)),
+      imageUrl: await searchGifFor(_.sample(config.search.terms)),
     }],
   };
 }

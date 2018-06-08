@@ -26,11 +26,17 @@ module.exports = {
     addReaction: 'add reaction',
     deleteReaction: 'delete reaction',
   },
-  searchTerms: [
-    'shame',
-    'stupid',
-    'laughing',
-  ],
+  search: {
+    url: 'https://api.giphy.com/v1/gifs/search',
+    terms: [
+      'shame',
+      'stupid',
+      'laughing',
+    ],
+    rating: 'pg-13',
+    maxSize: 1750000,
+    blackListedFormats: new RegExp('(.*_(still|webp|mp4))', 'i'),
+  },
   HALIcon: 'https://goo.gl/LsPgJe',
   giphyAttributionMark: 'https://goo.gl/AcrduK',
   repository: 'https://github.com/sasalatart/shamebot',
