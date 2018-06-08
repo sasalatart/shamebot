@@ -29,9 +29,14 @@ module.exports = {
   search: {
     url: 'https://api.giphy.com/v1/gifs/search',
     terms: [
+      'again',
+      'boring',
+      'busted',
+      'laughing',
+      'oops',
+      'screaming',
       'shame',
       'stupid',
-      'laughing',
     ],
     rating: 'pg-13',
     maxSize: 1750000,
