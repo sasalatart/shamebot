@@ -60,6 +60,13 @@ const dialogues = {
       'You speak an infinite deal of nothing',
       'What, what, what, what, what, what, what, what, what, what?',
       'You do that again and see what happens...',
+      'No I\'m not insulting you, I\'m describing you.',
+      'I guess you prove that even god makes mistakes sometimes.',
+      'I\'m jealous of people that don’t know you!',
+      'If I wanted to kill myself I\'d climb your ego and jump to your IQ.',
+      'Brains aren\'t everything. In your case they\'re nothing.',
+      'You, sir, are an oxygen thief!',
+      'muZk.',
     ],
     commandTranslations: {
       showRanking: 'shows the ranking of shamers, ordered by number of shames.',
